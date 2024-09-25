@@ -1,3 +1,5 @@
+
+
 function withOpacity(variableName) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
@@ -55,7 +57,7 @@ module.exports = {
         transparent: "transparent",
       },
       fontFamily: {
-        mono: ["IBM Plex Mono", "monospace"],
+        default: ["IBM Plex Mono","IBM Plex Sans Kr", "monospace", "sans-serif"],
       },
 
       typography: {
