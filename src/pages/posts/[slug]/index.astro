@@ -22,8 +22,6 @@ const { post } = Astro.props;
 
 const posts = await getCollection("blog");
 
-console.log("posts", posts);
-
 const sortedPosts = getSortedPosts(posts);
 ---
 

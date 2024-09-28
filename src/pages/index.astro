@@ -8,14 +8,12 @@ import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SITE, SOCIALS } from "@config";
+import { SOCIALS } from "@config";
 
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-console.log("recentPosts", recentPosts.length);
+const recentPosts = sortedPosts.slice(0, 4);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -24,7 +22,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Mingalaba</h1>
+      <h1>Welcome 👋</h1>
       <a
         target="_blank"
         href="/rss.xml"
@@ -43,26 +41,21 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </a>
 
       <p>
-        <!-- AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured. -->
-        안녕하세요 저는 임채현입니다. 만나서 반갑습니다.
-      </p>
-      <p>
-        Read the blog posts or check
+        안녕하세요 웹 프론트엔드 개발자 임채현입니다.<br /> 세상에 도움을 줄 수 있는
+        소프트웨어를 개발하기 위해 배우고 느끼는 바를 기록하고있어요.<br />
+        블로그 재미있게 읽어주시고 저에 대해 더 궁금하시면
         <LinkButton
           className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href="/about"
         >
-          README
-        </LinkButton> for more info.
+          readme
+        </LinkButton> 또는 아래의 링크를 확인해주세요.
       </p>
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
           <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
+            {/* <div class="social-links">Social Links:</div> */}
             <Socials />
           </div>
         )
@@ -72,40 +65,17 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <Hr />
 
     {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
       recentPosts.length > 0 && (
         <section id="recent-posts">
           <h2>Recent Posts</h2>
           <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < SITE.postPerIndex && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
+            {recentPosts.map(({ data, slug }) => (
+              <Card
+                href={`/posts/${slug}/`}
+                frontmatter={data}
+                secHeading={false}
+              />
+            ))}
           </ul>
         </section>
       )
