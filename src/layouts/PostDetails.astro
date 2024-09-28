@@ -2,12 +2,13 @@
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import Tag from "@components/Tag.astro";
+// import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
+import { Image } from "astro:assets";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -24,7 +25,8 @@ const {
   canonicalURL,
   pubDatetime,
   modDatetime,
-  tags,
+  // tags,
+  cover,
 } = post.data;
 
 const { Content } = await post.render();
@@ -43,6 +45,7 @@ const layoutProps = {
   modDatetime,
   canonicalURL,
   ogImage: ogUrl,
+  cover,
   scrollSmooth: true,
 };
 
@@ -62,7 +65,6 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <Header />
-
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
@@ -76,7 +78,7 @@ const nextPost =
     </button>
   </div>
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
+    <h1 class="post-title" transition:name={slugifyStr(title)}>{title}</h1>
     <Datetime
       pubDatetime={pubDatetime}
       modDatetime={modDatetime}
@@ -84,12 +86,24 @@ const nextPost =
       className="my-2"
     />
     <article id="article" class="prose mx-auto mt-8 max-w-3xl">
+      {
+        cover && (
+          <div class="pb-10">
+            <Image
+              src={cover}
+              alt={`${title}-thumbnail`}
+              class={"rounded-[10px]"}
+              transition:name={`${title}-${cover.src}`}
+            />
+          </div>
+        )
+      }
       <Content />
     </article>
 
-    <ul class="my-8">
+    <!-- <ul class="my-8">
       {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
-    </ul>
+    </ul> -->
 
     <div
       class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"

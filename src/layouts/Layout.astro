@@ -155,6 +155,8 @@ const structuredData = {
     <script is:inline src="/toggle-theme.js" async></script>
   </head>
   <body>
-    <slot />
+    <div class={`pt-[${SITE.headerBarHeight}]`}>
+      <slot />
+    </div>
   </body>
 </html>

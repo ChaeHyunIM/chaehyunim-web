@@ -1,13 +1,11 @@
 ---
 title: Look back
-author: Sat Naing
+author: Chaehyun Im
 pubDatetime: 2024-09-20T15:33:05.569Z
 slug: look-back
-featured: false
+cover: ../../assets/images/look-back/룩백.jpeg
 draft: false
 ogImage: /assets/forrest-gump-quote.webp
-tags:
-  - FAQ
 description: How to update project dependencies and AstroPaper template.
 ---
 
@@ -136,11 +134,11 @@ CSS작업을 할 떄 마다 프론트를 하는 것을 후회한다.😂😂 하
 
 ### PAPRIKAN IN FINLAND
 
-![](/images/look-back/finland.JPG)
+![](@assets/images/look-back/finland.jpg)
 
 ### PAPRIKAN CHRISTMAS PARTY
 
-![](/images/look-back/c_party.jpeg)
+![](@assets/images/look-back/c-party.jpeg)
 
 # AS ME
 
@@ -169,7 +167,7 @@ CSS작업을 할 떄 마다 프론트를 하는 것을 후회한다.😂😂 하
 
 ### 취업스터디 네컷
 
-![](/images/look-back/취업스터디.jpeg)
+![](@assets/images/look-back/취업스터디.jpeg)
 
 ## 미국 서부 여행
 
@@ -179,7 +177,7 @@ CSS작업을 할 떄 마다 프론트를 하는 것을 후회한다.😂😂 하
 
 ### LAS VEGAS BELLAGIO
 
-![](/images/look-back/vegas.jpeg)
+![](@assets/images/look-back/vegas.jpeg)
 
 ## 2023년을 준비하며
 
@@ -195,14 +193,10 @@ CSS작업을 할 떄 마다 프론트를 하는 것을 후회한다.😂😂 하
 
 왈라 폼으로 2022년을 요약하고 2023년의 목표를 정하고 싶다.
 
-![](/images/look-back/2022년.png)
+![](@assets/images/look-back/2022년.png)
 
-![](/images/look-back/2023년.png)
+![](@assets/images/look-back/2023년.png)
 
 ## Look Back Myself!
 
-![](/images/look-back/2022_V.jpeg)
-
-# 끝
-
-![](/images/look-back/뒷모습.jpeg)
+![](@assets/images/look-back/2022-V.jpeg)

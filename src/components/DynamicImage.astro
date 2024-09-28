@@ -1,0 +1,35 @@
+---
+import type { ImageMetadata } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import type { ACTION_ERROR_CODES } from "astro:actions";
+import { Image } from "astro:assets";
+
+// interface Props {
+//   imagePath: string;
+//   altText: string;
+// }
+
+interface Props extends HTMLAttributes<"img"> {
+  imagePath: string;
+  altText: string;
+  width?: number;
+  height?: number;
+}
+
+const { imagePath, altText, width, height } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,gif}"
+);
+const image = await images[imagePath]();
+if (!images[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`
+  );
+---
+
+<Image
+  src={images[imagePath]()}
+  alt={altText}
+  width={width || image.default.width}
+  height={width || image.default.width}
+/>

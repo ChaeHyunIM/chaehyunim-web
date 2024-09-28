@@ -1,0 +1,55 @@
+---
+import { slugifyStr } from "@utils/slugify";
+import type { CollectionEntry } from "astro:content";
+import DynamicImage from "./DynamicImage.astro";
+import Datetime from "./Datetime";
+import { Image } from "astro:assets";
+
+export interface Props {
+  href?: string;
+  frontmatter: CollectionEntry<"blog">["data"];
+  secHeading?: boolean;
+}
+
+const { href, frontmatter, secHeading = true } = Astro.props;
+const { title, pubDatetime, modDatetime, description, cover } = frontmatter;
+---
+
+<di class="flex items-center gap-4">
+  {
+    cover && (
+      <Image
+        src={cover}
+        alt={`${title}-thumbnail`}
+        class="h-[120px] w-[120px] rounded-[10px] object-cover object-center"
+        transition:name={`${title}-${cover.src}`}
+      />
+    )
+  }
+  <li class="my-6">
+    <a
+      href={href}
+      class="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+    >
+      {
+        secHeading ? (
+          <h2
+            class="text-lg font-medium decoration-dashed hover:underline"
+            transition:name={slugifyStr(title)}
+          >
+            {title}
+          </h2>
+        ) : (
+          <h3
+            class="text-lg font-medium decoration-dashed hover:underline"
+            transition:name={slugifyStr(title)}
+          >
+            {title}
+          </h3>
+        )
+      }
+    </a>
+    <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
+    <p>{description}</p>
+  </li>
+</di>
