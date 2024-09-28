@@ -1,0 +1,48 @@
+---
+import { LOCALE } from "@config";
+
+interface DatetimesProps {
+  pubDatetime: string | Date;
+  modDatetime: string | Date | undefined | null;
+}
+
+interface Props extends DatetimesProps {
+  size?: "sm" | "lg";
+  class?: string;
+}
+
+const {
+  pubDatetime,
+  modDatetime,
+  size = "sm",
+  class: className = "",
+} = Astro.props;
+
+const myDatetime = new Date(
+  modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime
+);
+
+const date = myDatetime.toLocaleDateString(LOCALE.langTag, {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<div class={`flex items-center opacity-80 ${className}`.trim()}>
+  {
+    modDatetime && modDatetime > pubDatetime ? (
+      <span class={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
+        Updated:
+      </span>
+    ) : (
+      <span class="sr-only">Published:</span>
+    )
+  }
+  <span
+    class={`italic ${size === "sm" ? "text-sm" : "text-base"}`}
+    transition:name={`${modDatetime || pubDatetime}`}
+  >
+    <time datetime={myDatetime.toISOString()}>{date}</time>
+  </span>
+</div>

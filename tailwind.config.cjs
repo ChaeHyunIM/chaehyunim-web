@@ -13,9 +13,13 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     screens: {
-      sm: '640px'
+      xs: '375px',
+      sm: '640px',
     },
     extend: {
+      paddingTop: {
+        header: "5rem"
+      },
       textColor: {
         skin: {
           base: withOpacity("--color-text-base"),

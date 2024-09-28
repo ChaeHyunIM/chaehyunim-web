@@ -11,12 +11,17 @@ export interface Props {
 const { activeNav } = Astro.props;
 ---
 
-<header class="fixed top-0 z-10 w-full bg-white">
+<header class="fixed top-0 z-10 w-full bg-skin-fill text-skin-base">
   <a id="skip-to-content" href="#main-content">Skip to content</a>
   <div class="nav-container">
     <div class="top-nav-wrap">
       <a href="/" class="logo whitespace-nowrap">
-        <SparklesText text={SITE.title} sparklesCount={10} client:load>
+        <SparklesText
+          text={SITE.title}
+          sparklesCount={10}
+          className="text-2xl sm:text-4xl"
+          client:load
+        >
           {
             LOGO_IMAGE.enable ? (
               <img

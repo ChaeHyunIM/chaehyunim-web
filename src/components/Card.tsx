@@ -1,7 +1,6 @@
 import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
-import DynamicImage from "./DynamicImage.astro";
 
 export interface Props {
   href?: string;
@@ -10,8 +9,7 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter, secHeading = true }: Props) {
-  const { title, pubDatetime, modDatetime, description, thumbnail } =
-    frontmatter;
+  const { title, pubDatetime, modDatetime, description } = frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
@@ -20,9 +18,6 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
 
   return (
     <div>
-      {thumbnail && (
-        <DynamicImage imagePath={thumbnail} altText={`${title}-thumbnail`} />
-      )}
       <li className="my-6">
         <a
           href={href}
