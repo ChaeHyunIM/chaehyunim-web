@@ -41,4 +41,8 @@ export default defineConfig({
   experimental: {
     contentLayer: true,
   },
+  image: {
+    domains: ["api.microlink.io"],
+    remotePatterns: [{ protocol: "https" }],
+  },
 });
