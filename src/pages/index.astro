@@ -7,13 +7,13 @@ import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
+import { SITE, SOCIALS } from "@config";
 import Card from "@/components/Card.astro";
 
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const recentPosts = sortedPosts.slice(0, 4);
+const recentPosts = sortedPosts.slice(0, SITE.postPerIndex);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -121,15 +121,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   }
 
   /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
-  #recent-posts {
-    @apply pb-6 pt-12;
-  }
-  #featured h2,
+
   #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+    @apply my-8 text-2xl font-semibold tracking-wide sm:my-10;
   }
   .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+    @apply my-10 text-center;
   }
 </style>

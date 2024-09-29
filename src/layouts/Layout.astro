@@ -1,5 +1,5 @@
 ---
-import { LOCALE, NAV, SITE } from "@config";
+import { LOCALE, SITE } from "@config";
 import "@styles/base.css";
 import { ViewTransitions } from "astro:transitions";
 import "@fontsource/ibm-plex-mono/400.css";
@@ -11,7 +11,7 @@ import "@fontsource/ibm-plex-sans-kr/korean-400.css";
 import "@fontsource/ibm-plex-sans-kr/korean-500.css";
 import "@fontsource/ibm-plex-sans-kr/korean-600.css";
 import "@fontsource/ibm-plex-sans-kr/korean-700.css";
-import FloatingNav from "@/components/ui/floating-navbar";
+
 // import "@fontsource/ibm-plex-mono";
 // import "@fontsource/ibm-plex-sans-kr"
 
@@ -157,7 +157,6 @@ const structuredData = {
   </head>
   <body>
     <div class={"pt-16"}>
-      <FloatingNav navItems={NAV} client:load={true} />
       <slot />
     </div>
   </body>

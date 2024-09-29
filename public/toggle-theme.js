@@ -55,7 +55,7 @@ window.onload = () => {
     reflectPreference();
 
     // now this script can find and listen for clicks on the control
-    document.querySelector("#theme-btn")?.addEventListener("click", () => {
+    document.querySelector("#theme")?.addEventListener("click", () => {
       themeValue = themeValue === "light" ? "dark" : "light";
       setPreference();
     });
