@@ -1,12 +1,12 @@
 ---
 title: Look back
 author: Chaehyun Im
-pubDatetime: 2024-09-20T15:33:05.569Z
+pubDatetime: 2022-12-30T15:33:05.569Z
 slug: look-back
 cover: ../../assets/images/look-back/룩백.jpeg
 draft: false
-ogImage: /assets/forrest-gump-quote.webp
-description: How to update project dependencies and AstroPaper template.
+ogImage: ../../assets/images/look-back/룩백.jpeg
+description: 2022년을 돌아보며..
 ---
 
 # Good bye 2022 👋
