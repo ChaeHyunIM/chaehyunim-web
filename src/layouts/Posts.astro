@@ -22,7 +22,7 @@ const { page } = Astro.props;
     pageTitle="Posts"
     pageDesc="틀린 내용이 있을 수 있어요. 너그럽게 봐주세요."
   >
-    <ul>
+    <ul class="flex flex-col gap-8">
       {
         page.data.map(({ data, slug }) => (
           <Card href={`/posts/${slug}/`} frontmatter={data} />
