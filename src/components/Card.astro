@@ -14,7 +14,7 @@ const { href, frontmatter, secHeading = true } = Astro.props;
 const { title, pubDatetime, modDatetime, description, cover } = frontmatter;
 ---
 
-<di class="flex items-center gap-4">
+<div class="flex items-center gap-4">
   {
     cover && (
       <Image
@@ -51,4 +51,4 @@ const { title, pubDatetime, modDatetime, description, cover } = frontmatter;
     <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
     <p>{description}</p>
   </li>
-</di>
+</div>

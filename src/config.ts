@@ -26,6 +26,21 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
+export const NAV = [
+  {
+    name: "Home",
+    link: "/",
+  },
+  {
+    name: "Posts",
+    link: "/posts",
+  },
+  {
+    name: "Readme",
+    link: "/about",
+  },
+];
+
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",

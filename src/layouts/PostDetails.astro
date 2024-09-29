@@ -78,9 +78,10 @@ const nextPost =
     </button>
   </div>
   <main id="main-content">
-    <h1 class="post-title" transition:name={slugifyStr(title)}>{title}</h1>
+    <h1 class="post-title" transition:name={slugifyStr(title)}>
+      {title}
+    </h1>
     <Datetime
-      transition:name={`${slugifyStr(title)}-${modDatetime || pubDatetime}`}
       pubDatetime={pubDatetime}
       modDatetime={modDatetime}
       size="lg"
@@ -93,7 +94,7 @@ const nextPost =
             <Image
               src={cover}
               alt={`${title}-thumbnail`}
-              class={"rounded-[10px]"}
+              class="cover-img rounded-[10px]"
               transition:name={`${title}-${cover.src}`}
             />
           </div>
@@ -190,6 +191,7 @@ const nextPost =
       }
     </div>
   </main>
+
   <Footer />
 </Layout>
 
@@ -199,6 +201,30 @@ const nextPost =
   }
   .post-title {
     @apply text-2xl font-semibold text-skin-accent;
+  }
+  .container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .box {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    transition: opacity 0.3s ease;
+  }
+  .box.fade {
+    opacity: 0.3;
+  }
+  #scroll-message {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-size: 24px;
+    margin-bottom: 20px;
   }
 </style>
 
@@ -322,4 +348,53 @@ const nextPost =
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
+
+  window.elementStates = window.elementStates || new Map();
+
+  function handleIntersection(entries) {
+    entries.forEach(entry => {
+      const element = entry.target;
+      const scopeValue =
+        window.elementStates.get(element) ||
+        element.dataset["astroTransitionScope"];
+
+      if (entry.isIntersecting) {
+        // If the element is intersecting, set the attribute
+        element.setAttribute("data-astro-transition-scope", scopeValue);
+      } else {
+        // If the element is not intersecting, remove the attribute
+        element.removeAttribute("data-astro-transition-scope");
+      }
+
+      // Always update the state
+      window.elementStates.set(element, scopeValue);
+    });
+  }
+
+  function setupObserver() {
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1, // 10% visibility
+    });
+
+    const elements = document.querySelectorAll("[data-astro-transition-scope]");
+    elements.forEach(el => {
+      observer.observe(el);
+      // Initialize or update the state for each element
+      window.elementStates.set(el, el.dataset["astroTransitionScope"]);
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupObserver);
+
+  // Cleanup function to remove references to elements that no longer exist
+  function cleanupElementStates() {
+    window.elementStates.forEach((value, element) => {
+      if (!document.body.contains(element)) {
+        window.elementStates.delete(element);
+      }
+    });
+  }
+
+  // Run cleanup on before page preparation
+  document.addEventListener("astro:before-preparation", cleanupElementStates);
 </script>
