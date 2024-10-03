@@ -44,7 +44,7 @@ export const NAV = [
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://github.com/chaehyunim",
     linkTitle: ` ${SITE.title} on Github`,
     active: true,
   },
@@ -62,7 +62,7 @@ export const SOCIALS: SocialObjects = [
   },
   {
     name: "LinkedIn",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://www.linkedin.com/in/%EC%B1%84%ED%98%84-%EC%9E%84-60840726b/",
     linkTitle: `${SITE.title} on LinkedIn`,
     active: true,
   },
