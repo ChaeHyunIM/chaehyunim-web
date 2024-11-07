@@ -5,7 +5,6 @@ pubDatetime: 2023-12-31T15:33:05.569Z
 slug: goodbye-2023
 cover: ../../assets/images/goodbye-2023/안녕에리.jpeg
 draft: false
-ogImage: ../../assets/images/look-back/안녕에리.jpeg
 description: 2023년을 보내며..
 ---
 

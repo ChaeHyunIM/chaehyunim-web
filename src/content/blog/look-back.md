@@ -5,7 +5,6 @@ pubDatetime: 2022-12-30T15:33:05.569Z
 slug: look-back
 cover: ../../assets/images/look-back/룩백.jpeg
 draft: false
-ogImage: ../../assets/images/look-back/룩백.jpeg
 description: 2022년을 돌아보며..
 ---
 
