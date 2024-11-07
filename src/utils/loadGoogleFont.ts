@@ -58,7 +58,7 @@ async function loadGoogleFonts(
     },
     {
       name: "IBM Plex Sans KR",
-      font: "IBM+Plex+Sans+KR:wght@700",
+      font: "IBM+Plex+Sans+KR:wght@400",
       weight: 400,
       style: "normal",
     },
