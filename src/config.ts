@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: "Chaehyun Im",
   profile: "https://github.com/chaehyunim/",
   desc: "A Web of Chaehyun Im",
-  title: "Chaehyun Im Web",
+  title: "Chaehyun Im",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 3,
