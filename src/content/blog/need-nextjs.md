@@ -91,7 +91,7 @@ Next.js는 이 문제를 해결하기 위해 SSR을 도입하여, 요청이 들�
 
 #### Static Rendering vs Dynamic Rendering
 
-위 그림에서 보다시피 Next.js는 **정적 렌더링(Static Rendering)**과 **동적 렌더링(Dynamic Rendering)**을 모두 지원합니다.
+위 그림에서 보다시피 Next.js는 **정적 렌더링**(Static Rendering)과 **동적 렌더링**(Dynamic Rendering)을 모두 지원합니다.
 
 #### 1. Static Rendering/SSG(static site generation) (정적 렌더링)
 
