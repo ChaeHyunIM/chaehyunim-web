@@ -79,30 +79,38 @@ import { Link } from "react-router-dom";
 
 Next.js는 이 문제를 해결하기 위해 SSR을 도입하여, 요청이 들어올 때마다 서버에서 HTML을 생성하여 클라이언트로 전달합니다. 이를 통해
 
-- 초기 페이지 로딩 속도 개선 – 브라우저가 별도의 js 로드 없이 즉시 완전한 HTML을 받을 수 있습니다.
+- 초기 페이지 로딩 속도 개선 – 브라우저가 별도의 js 로드 없이 즉시 완전한 HTML을 보여줄 수 있습니다.
 - SEO 향상 – 검색 엔진이 HTML을 바로 인식할 수 있습니다.
 - 유연한 렌더링 방식 – 필요에 따라 페이지 단위로 `getServerSideProps`, `getStaticProps`등을 선택 가능합니다.
 
 와 같은 장점을 얻을 수 있습니다.
 
-다음은 next.js의 SSR을 통한 웹 렌더링이 어떻게 진행되는 지 표현한 그림입니다.
+다음은 next.js의 SSR을 통한 웹 렌더링이 어떻게 진행되는 지 나타낸 그림입니다.
 
 ![](@assets/images/need-nextjs/ssr-flow.png)
 
-#### Static Rendering vs Dynamic Rendering
+Next.js는 **기존 CSR 방식만을 구사하는 SPA에 대해서 SSR을 통해 초기 HTML 로드를 서버에서 부터 빠르게 가져와 웹 성능과 SEO와 같은 사용자 경험을 향상시키는 렌더링 방식**을 채택하였습니다.
 
-위 그림에서 보다시피 Next.js는 **정적 렌더링**(Static Rendering)과 **동적 렌더링**(Dynamic Rendering)을 모두 지원합니다.
+Next.js의 SSR은 매 요청마다 서버로부터 새로운 HTML을 생성해야했던 기존의 MPA 기반 SSR과도 다릅니다. Next.js에서 SSR을 수행한다고 해서 기존 React SPA의 CSR 방식을 완전히 대체하는 것이 아닙니다.
+
+**Next.js의 SSR을 구현하는 함수들은 모두 초기에 어떻게 HTML을 가져올지만 관여하기 때문입니다.** SSR로 제공된 HTML이 브라우저에 도착한 후에는 React의 SPA 메커니즘과 동일하게 동작하며, 이후 클라이언트에서 Ajax 요청을 통해 CSR 방식처럼 동적으로 데이터를 가져올 뿐만 아니라, 이를 활용해 새로운 DOM을 생성하고 업데이트할 수도 있습니다.
+
+#### Next.js의 SSR 방식
+
+위 그림을 보면 Next.js는 SSR을 수행할 때 **정적 렌더링**(Static Rendering)과 **동적 렌더링**(Dynamic Rendering) 2가지 방식을 지원하는 것을 확인할 수 있습니다.
+
+이 두가지 방식에 대해 간단히 설명을 드리겠습니다.
 
 #### 1. Static Rendering/SSG(static site generation) (정적 렌더링)
 
-- Next.js에서는 기본적으로 **Static Rendering(정적 렌더링)**을 사용합니다
-- 정적 렌더링은 빌드 타임에 HTML을 미리 생성하여 요청이 들어오면 즉시 제공하는 방식이며 CDN에서부터 제공받을 수 있습니다.
-- 배포 이후에는 runtime server가 필요하지 않습니다.
+- **Next.js에서는 기본적으로 Static Rendering(정적 렌더링)을 사용합니다**
+- 빌드 타임에 HTML을 미리 생성하여 저장하고, 요청이 들어오면 즉시 제공하는 방식입니다
+- HTML이 미리 생성되므로 배포 후에는 별도의 서버가 필요하지 않으며, CDN을 통해 빠르게 전달됩니다.
 - Next.js에서는 getStaticProps 또는 ISR(Incremental Static Regeneration)을 사용하여 정적 렌더링을 수행할 수 있습니다.
 
 ##### ✅ 장점:
 
-- 요청 시 서버 부하가 없습니다. (CDN에서 즉시 제공)
+- 요청 시 서버 부하가 없습니다. (CDN 활용 가능)
 - 빠른 페이지 로딩 속도를 보유합니다.
 - SEO 최적화
 
@@ -123,14 +131,9 @@ Next.js는 이 문제를 해결하기 위해 SSR을 도입하여, 요청이 들�
 ##### ❌ 단점:
 
 - 요청마다 서버가 HTML을 생성해야 하므로 성능 부담이 있습니다.
-- 응답 시간이 길어질 수 있습니다.
-  - 특히 serverless 환경에서는 cold start로 인해 첫 응답 시간이 매우 길어집니다.
+- 서버에서 데이터를 가져오는 과정이 길어질 경우, 최종적으로 클라이언트가 HTML을 받기까지의 응답 시간이 지연될 수 있습니다.
 
-Next.js는 **기존 CSR 방식만을 구사하는 SPA에 대해서 SSR을 통해 초기 HTML 로드를 서버에서 부터 빠르게 가져와 웹 성능과 SEO와 같은 사용자 경험을 향상시키는 렌더링 방식**을 채택하였습니다.
-
-Next.js의 SSR은 매 요청마다 서버로부터 새로운 HTML을 생성해야했던 기존의 MPA 기반 SSR과도 다릅니다. 또한 Next.js를 사용한다고 기존 react가 가진 SPA 메커니즘을 대체하거나 CSR의 반대말도 아닙니다.
-
-Next.js의 SSR을 구현하는 함수들은 모두 초기에 어떻게 HTML을 가져올지만 관여하기 때문입니다. SSR로 제공된 HTML이 브라우저에 도착한 후에는 기존의 React SPA처럼 동작하며 클라이언트의 ajax 요청에 의해 CSR처럼 동적으로 DOM을 제공할 수 있습니다.
+**결국 Next.js의 SSR에서 중요한 것은 서버에서 HTML을 언제 생성하는가입니다.** 서버에서 HTML을 빌드 시점(Build Time)에 생성할 것인지, 요청 시점(Request Time)에 생성할 것인지를 잘 파악하여 결정하는 것이 중요하며, 이를 적절하게 선택하는 개발자의 역량이 웹 성능과 사용자 경험을 최적화하는 핵심 요소가 됩니다.
 
 ## Next.js는 리액트 **프레임워크**다.
 
@@ -208,7 +211,7 @@ Next.js의 주 사용자들은 제품에 집중하는 경우가 많기 때문에
 
 이러한 문제를 해결하기 위해 [OpenNext](https://opennext.js.org/)와 같은 오픈소스 배포 도구가 등장했지만, Next.js의 기본적인 배포 전략이 Vercel을 중심으로 설계되어 있는 점은 여전히 개발자들에게 불편한 요소로 남아 있습니다.
 
-마지막으로 이러한 Serverless 플랫폼에 배포하면 SSR은 필연적으로 [cold start](https://mikhail.io/serverless/coldstarts/define/) 문제에 직면하게 됩니다.
+**마지막으로 이러한 Serverless 플랫폼에 배포하면 SSR은 필연적으로 [cold start](https://mikhail.io/serverless/coldstarts/define/) 문제에 직면하게 됩니다.**
 
 Serverless 아키텍처는 사용량이 없을 때 리소스를 자동으로 축소하고, 필요할 때 다시 인스턴스를 생성하는 방식을 사용합니다. 이러한 특성은 비용 절감에는 유리하지만, 초기 요청 시 서버가 활성화되는 데 시간이 걸리는 문제를 야기할 수 있습니다.
 
